@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import  TfidfVectorizer
 
 
 def extract_keys(file_name):
+    print('Extracting keys....')
     with open('in.csv', newline='', encoding='utf-8') as file:
         a = csv.reader(file)
         questions = []
