@@ -10,7 +10,7 @@ def extract_keys(file_name):
         for row in a:
             questions.append(row[0])
 
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(max_df=0.2)
     response = vectorizer.fit_transform(questions)
     return vectorizer.get_feature_names()
 

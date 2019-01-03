@@ -1,0 +1,35 @@
+C:\Users\ravin\AppData\Local\Programs\Python\Python36\python.exe H:/ChatBot/ChatBot/deploy/_deployment/testcall.py
+Enter question: hello
+http://www.reactiongifs.com/
+Enter question: hello?
+http://i.imgur.com/j8
+Enter question: hey
+**
+Enter question: how are you?
+I'm alright.
+Enter question: howold are you?
+I'm not old enough.
+Enter question: how old are you?
+I'm 16.
+Enter question: are you a boy or a girl?
+No, I'm a girl.
+Enter question: do you like cake?
+I don't like cake.
+Enter question: what do you like?
+http://www.reactiongifs.com/
+Enter question: so you like gifs?
+http://www.reactiongifs.com/
+Enter question: so you like gifs ?
+http://www.reactiongifs.com/
+Enter question: so you like gifs
+https://gfycat.com/
+Enter question: i hate you
+I love you too.
+Enter question: who made you ?
+I don't know. I'
+Enter question: where do you live?
+http://www.reactiongifs.com/
+Enter question: where do you live ?
+http://www.reactiongifs.com/
+Enter question: 
+Process finished with exit code 1

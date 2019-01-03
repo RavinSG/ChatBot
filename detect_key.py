@@ -33,23 +33,28 @@ def create_dict(file_name):
         return vectors
 
 
-def answer_question(key_words, answer_dict):
-    while True:
-        questions = input("Enter question: ")
-        questions = questions.lower().strip().replace('?', '').split(' ')
-        q_vector = [0] * len(key_words)
-        for i in questions:
-            if i in key_words:
-                index = key_words.index(i)
-                q_vector[index] = 1
-        q_vector = ''.join(map(str, q_vector))
-        try:
-            print(answer_dict[q_vector])
-        except:
-            print('Sorry I don\'t know the answer to that question :(')
-
-
-
 answer_dict = create_dict('in.csv')
-answer_question(answer_dict['key_words'], answer_dict)
 
+
+def change_answer_dict(file_name):
+    global answer_dict
+    answer_dict = create_dict(file_name)
+
+
+def answer_question(questions):
+    global answer_dict
+    key_words = answer_dict['key_words']
+    questions = questions.lower().strip().replace('?', '').split(' ')
+    q_vector = [0] * len(key_words)
+    for i in questions:
+        if i in key_words:
+            index = key_words.index(i)
+            q_vector[index] = 1
+    q_vector = ''.join(map(str, q_vector))
+    try:
+        print(answer_dict[q_vector])
+    except:
+        print('Sorry I don\'t know the answer to that question :(')
+
+
+answer_question('When the first cricket game was played?')
