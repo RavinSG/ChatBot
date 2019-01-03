@@ -20,7 +20,6 @@ def call_database(question):
 
 
 while True:
-
     ques = input('Enter question: ')
     out = inference.inference(ques)
     ans = out['answers']
@@ -30,3 +29,4 @@ while True:
 
     for i in range(length):
         print(ans[i], ' ', scores[i])
+

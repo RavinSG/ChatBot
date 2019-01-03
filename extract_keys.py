@@ -12,6 +12,7 @@ def extract_keys(file_name):
 
     vectorizer = TfidfVectorizer(max_df=0.2)
     response = vectorizer.fit_transform(questions)
+    print(vectorizer.get_feature_names())
     return vectorizer.get_feature_names()
 
 
