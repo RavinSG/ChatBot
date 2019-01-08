@@ -59,19 +59,15 @@ def answer_question(question):
     keys = remove_stop_words(question).split(' ')
     max_score = 0
     answer = c.execute('SELECT * from {tn}'.format(tn =username)).fetchall()
-    reply = ''
+    reply = 'Sorry I don\'t know that about you :('
     for ans in answer:
         score = 0
         q_keys = ans[0].split(' ')
         for key in keys:
             if key in q_keys:
                 score += 1
-        if score >= max_score:
+        if score > max_score:
             max_score = score
             reply = ans[1]
     print(change_pronouns(reply))
 
-
-while True:
-    ques = input('Question: ')
-    answer_question(ques)
