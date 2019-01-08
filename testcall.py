@@ -28,10 +28,15 @@ def call_user_database(question):
     return user_db.answer_question(question)
 
 
-modes = ['Cricket Questions', 'Private Conversation', 'Learning Mode', 'Neural Translation']
+def call_user_change(username):
+    user_db.change_user(username)
+
+
+modes = ['Cricket Questions', 'Private Conversation', 'Learning Mode', 'Neural Translation', 'Change User']
 current_mode = 0
+prompts = ['Enter question', 'What should I tell about you? ', 'Tell me about yourself', 'Ask the Neural Network']
 while True:
-    ques = input('Enter question: ')
+    ques = input('{}: '.format(prompts[current_mode]))
     if ques == 'ESC':
         for mode in range(len(modes)):
             if mode == current_mode:
@@ -42,10 +47,14 @@ while True:
         while True:
             try:
                 entered_mode = int(input('Please select a mode from the above list: ')) - 1
-                if entered_mode > 3 or entered_mode < 0:
+                if entered_mode > (len(modes) - 1) or entered_mode < 0:
                     print('Enter a valid number')
                 else:
                     current_mode = entered_mode
+                    if current_mode == 4:
+                        user = input('Please enter your name: ')
+                        call_user_change(user)
+                        current_mode = 1
                     break
             except:
                 print('Enter a valid number')
@@ -58,3 +67,4 @@ while True:
             call_user_database(ques)
         elif current_mode == 2:
             user_db.add_entry(ques)
+

@@ -10,22 +10,38 @@ c = conn.cursor()
 stop_words = json.load(open('stopwords-en.json', 'r', encoding='utf-8'))
 
 
+def check_user(username):
+    names = c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'".format(
+        table_name=username)).fetchall()
+    if len(names) == 0:
+        return True
+    else:
+        return False
+
+
 def create_user(new_user):
     global username
     username = new_user
     field1 = 'question'
     field2 = 'answer'
     field_type = 'STRING'
-    names = c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'".format(
-        table_name=username)).fetchall()
-
-    if len(names) == 0:
+    if check_user(new_user):
         c.execute('CREATE TABLE {tn} ('
                   '{f1} {ft1}, '
                   '{f2} {ft2}'
                   ')'.format(tn=username, f1=field1, ft1=field_type, f2=field2, ft2=field_type))
+    return None
 
-    return names
+
+def change_user(user):
+    if check_user(user):
+        print('Hello {}, it\'s nice to meet you'.format(user))
+        create_user(user)
+    else:
+        global username
+        username = user
+        print('Welcome back {}!'.format(user))
+
 
 
 def remove_stop_words(phrase):
@@ -39,7 +55,7 @@ def remove_stop_words(phrase):
 
 def add_entry(answer):
     question = remove_stop_words(answer)
-    c.execute('INSERT INTO Ravin VALUES (?, ?)',
+    c.execute('INSERT INTO {} VALUES (?, ?)'.format(username),
               (question, answer))
     conn.commit()
     return None
@@ -58,7 +74,7 @@ def change_pronouns(phrase):
 def answer_question(question):
     keys = remove_stop_words(question).split(' ')
     max_score = 0
-    answer = c.execute('SELECT * from {tn}'.format(tn =username)).fetchall()
+    answer = c.execute('SELECT * from {tn}'.format(tn=username)).fetchall()
     reply = 'Sorry I don\'t know that about you :('
     for ans in answer:
         score = 0
@@ -70,4 +86,3 @@ def answer_question(question):
             max_score = score
             reply = ans[1]
     print(change_pronouns(reply))
-
