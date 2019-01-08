@@ -52,7 +52,7 @@ def change_pronouns(phrase):
     for i in range(len(phrase)):
         if phrase[i] in source:
             phrase[i] = target[source.index(phrase[i])]
-    return ' '.join(phrase)
+    return ' '.join(phrase).capitalize()
 
 
 def answer_question(question):
@@ -71,4 +71,7 @@ def answer_question(question):
             reply = ans[1]
     print(change_pronouns(reply))
 
-answer_question('Where do i study?')
+
+while True:
+    ques = input('Question: ')
+    answer_question(ques)

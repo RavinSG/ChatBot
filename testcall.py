@@ -28,5 +28,10 @@ while True:
     length = len(ans)
 
     for i in range(length):
-        print(ans[i], ' ', scores[i])
+        count = 0
+        if 'http:' not in ans[i] and scores[i] > 0:
+            count += 1
+            print(ans[i], ' ', scores[i])
+            if count > 3:
+                break
 
