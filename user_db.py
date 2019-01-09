@@ -19,6 +19,10 @@ def check_user(username):
         return False
 
 
+def get_user():
+    global username
+    return username
+
 def create_user(new_user):
     global username
     username = new_user

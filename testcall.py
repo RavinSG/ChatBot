@@ -32,12 +32,13 @@ def call_user_change(username):
     user_db.change_user(username)
 
 
-modes = ['Cricket Questions', 'Private Conversation', 'Learning Mode', 'Neural Translation', 'Change User']
+modes = ['Cricket Questions', 'Private Conversation', 'Learning Mode', 'Neural Translation', 'Change User', 'Change Answer File']
 current_mode = 0
 prompts = ['Enter question', 'What should I tell about you? ', 'Tell me about yourself', 'Ask the Neural Network']
 while True:
     ques = input('{}: '.format(prompts[current_mode]))
     if ques == 'ESC':
+        print('Username:',user_db.get_user())
         for mode in range(len(modes)):
             if mode == current_mode:
                 print('{}) '.format(mode + 1), modes[mode], '<--- current mode')
@@ -55,6 +56,15 @@ while True:
                         user = input('Please enter your name: ')
                         call_user_change(user)
                         current_mode = 1
+                    elif current_mode == 5:
+                        while True:
+                            try:
+                                file = input('Please enter the file name:')
+                                detect_key.change_answer_dict(file)
+                                current_mode = 0
+                                break
+                            except:
+                                print('Please enter a valid file path!')
                     break
             except:
                 print('Enter a valid number')
